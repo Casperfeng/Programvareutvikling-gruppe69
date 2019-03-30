@@ -2,4 +2,4 @@ image: node:10.15.3
 
 all_tests:
   script:
-   - npm test
+    - npm test

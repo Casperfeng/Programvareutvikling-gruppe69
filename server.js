@@ -8,11 +8,14 @@ const orders = require("./api/routes/orders");
 const reports = require("./api/routes/reports");
 const auth = require("./api/routes/auth");
 const app = express();
+const path = require("path");
 
 if (!config.get("jwtPrivateKey")) {
   console.error("FATAL ERROR: jwtPrivateKey is not defined");
   process.exit(1);
 }
+
+app.use(express.static(path.join(__dirname, "client/build")));
 
 const port = process.env.PORT || 5000;
 
@@ -41,14 +44,6 @@ pool.getConnection((err, connection) => {
 }); //Creates connection to mysql_database
 // console.log that your server is up and running
 app.listen(port, () => console.log(`Listening on port ${port}`));
-
-// create a GET route
-app.get("/express_backend", (req, res) => {
-  res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" });
-});
-
-/*When an endpoint with /api/users/<something more> is called from react, 
-the server sends the job to users.js in the api/routes/ folder*/
 
 app.use("/api/users", users);
 app.use("/api/products", products);

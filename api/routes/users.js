@@ -12,12 +12,6 @@ const bodyparser = require("body-parser");
 router.use(bodyparser.urlencoded({ extended: false }));
 router.use(bodyparser.json());
 
-//Gets all users from endpoint /api/users/all
-router.get("/all", async (req, res) => {
-  const users = await sendQuery(server.pool, "SELECT * FROM users");
-  res.send(users);
-});
-
 //register new user, use endpoint /api/users/register
 router.post("/register", async (req, res) => {
   const firstName = req.body.firstName;
@@ -122,17 +116,6 @@ router.delete("/", async (req, res) => {
   const sqlquery = "DELETE FROM users WHERE userID = " + userID + ";";
   await sendQuery(server.pool, sqlquery);
   res.send("User deleted where userID = " + userID);
-});
-
-//Hente en bruker
-router.post("/returnUser", async (req, res) => {
-  const userID = req.body.userID;
-
-  const sqlquery = "SELECT * FROM users WHERE userID = " + userID + ";";
-
-  const userResult = await sendQuery(server.pool, sqlquery);
-
-  res.send(userResult);
 });
 
 module.exports = router;

@@ -9,44 +9,6 @@ const bodyparser = require("body-parser");
 router.use(bodyparser.urlencoded({ extended: false }));
 router.use(bodyparser.json());
 
-//oppdatere bruker-rating, kan forsåvidt ligge i users.js også
-router.post("/updateRating", async (req, res) => {
-  const ratingUserID = req.body.state.userID; //Hentes fra login
-  const orderID = req.body.state.orderID; //Følgende tre verdier hentes fra et returnert order-objekt(brukeren har liste)
-  const buyerID = req.body.state.buyerID;
-  const sellerID = req.body.state.sellerID;
-  const ratingValue = req.body.state.ratingValue; //+1 eller -1
-
-  var ratingUserType = "";
-  var ratedUserType = "";
-  var ratedUserID = 0;
-
-  if (ratingUserID === buyerID) {
-    ratingUserType = "Buyer";
-    ratedUserType = "Seller";
-    ratedUserID = sellerID;
-  } else {
-    ratingUserType = "Seller";
-    ratedUserType = "Buyer";
-    ratedUserID = buyerID;
-  }
-
-  const sqlquery =
-    "UPDATE orders SET ratedBy" +
-    ratingUserType +
-    " = 1 WHERE orderID = " +
-    orderID +
-    "; UPDATE user SET rating = rating + " +
-    ratingValue +
-    "WHERE userID = " +
-    ratedUserID +
-    ";";
-
-  await sendQuery(server.pool, sqlquery);
-
-  res.send("Updated user-ratings where the rated user = " + ratedUserType);
-});
-
 //hente relevante orders
 router.get("/myOrders", async (req, res) => {
   const userID = req.query.userID;
