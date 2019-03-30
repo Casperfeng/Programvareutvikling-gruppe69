@@ -4,15 +4,6 @@ let userID = null;
 let token = null;
 let productID = null;
 
-describe("GET /users", function() {
-  it("respond with json containing a list of all users", function(done) {
-    request(app)
-      .get("/api/users/all")
-      .set("Accept", "application/json")
-      .expect(200, done);
-  });
-});
-
 describe("Register user", function() {
   const newUser = {
     firstName: "test",

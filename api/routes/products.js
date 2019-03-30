@@ -31,7 +31,6 @@ router.post("/newProduct", auth, async (req, res) => {
     sellerID,
     endDate
   ];
-  console.log(userValueArray);
 
   sqlquery =
     "INSERT INTO products (title, description, image, highestBid, highestBidder, startingBid, sellerID, endDate) VALUES " +

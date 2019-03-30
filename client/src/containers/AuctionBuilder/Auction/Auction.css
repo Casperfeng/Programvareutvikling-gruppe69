@@ -63,7 +63,7 @@ body {
   text-align: center;
 }
 
-.auctionImage {
+.auctionImage img{
   margin: 0 auto;
   background: #333;
   top: 0.8rem;

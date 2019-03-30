@@ -35,6 +35,11 @@
   border-radius: 4px;
 }
 
+.errorMsg {
+  color: red;
+  
+}
+
 
 .registerButton {
   width: 100%;

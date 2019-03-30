@@ -30,7 +30,6 @@ class App extends Component {
 
   render() {
     //can pass user to navbar. Then you can render conditionaly if user exist or not.
-    console.log(this.state.user);
     if (this.state.user) {
       try {
         jwtDecode(localStorage.getItem("token"));
