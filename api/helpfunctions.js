@@ -59,7 +59,7 @@ Budbua AS";
 generateBuyerEmail = emailparams => {
   let msg =
     "Gratulerer " +
-    emailparams.sellerName +
+    emailparams.buyerName +
     ",\nDu vant budrunden på " +
     emailparams.title +
     "\
