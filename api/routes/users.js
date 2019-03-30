@@ -99,23 +99,21 @@ router.put("/", async (req, res) => {
   res.send(token);
 });
 
-//verifisere email
-router.get("/returnEmail", async (req, res) => {
-  const email = req.body.email;
-
-  const sqlquery = "SELECT * FROM users WHERE email = " + email;
-
-  const emailResult = await sendQuery(server.pool, sqlquery);
-
-  res.send(emailResult);
-});
-
 //slette bruker fra systemet
 router.delete("/", async (req, res) => {
   const userID = req.query.userID;
   const sqlquery = "DELETE FROM users WHERE userID = " + userID + ";";
   await sendQuery(server.pool, sqlquery);
   res.send("User deleted where userID = " + userID);
+});
+
+router.get("/location", async (req, res) => {
+  const userID = req.query.userID;
+  console.log(userID);
+  const sqlquery =
+    "SELECT streetName, zipCode FROM users WHERE userID=" + userID + ";";
+  const loc = await sendQuery(server.pool, sqlquery);
+  res.send(loc[0]);
 });
 
 module.exports = router;
