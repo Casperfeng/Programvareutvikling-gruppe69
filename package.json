@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "test": "mocha --exit"
+    "test": "mocha --exit",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "dependencies": {
     "axios": "^0.18.0",
