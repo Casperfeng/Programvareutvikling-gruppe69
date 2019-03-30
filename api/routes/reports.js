@@ -35,6 +35,7 @@ router.get("/", async (req, res) => {
   r.reportID,\
   CONCAT(reporting.firstName,' ', reporting.lastName) as reportingUser,\
   CONCAT(reported.firstName, ' ', reported.lastName) as reportedUser,\
+  reported.userID as reportedUserID,\
   r.description,\
   product.title \
   FROM reports as r \

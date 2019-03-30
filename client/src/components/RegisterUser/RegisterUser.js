@@ -76,7 +76,13 @@ class RegisterUser extends Component {
   };
 
   handleSubmit = e => {
-    //checks that every form has one element and password is the same as repeated password
+    if (
+          this.validateEmail(this.state.email) 
+    && this.validateName(this.state.firstName, this.state.lastName)
+    && this.validatePhoneNumber(this.state.phoneNumber)
+    && this.validateStreetName(this.state.streetName)
+    && this.validateZipCode(this.state.zipCode)
+    ){
     axios
       .post("/api/users/register", {
         firstName: this.state.firstName,
@@ -105,7 +111,8 @@ class RegisterUser extends Component {
       .catch(error => {
         console.log(error);
         this.setState({registeredUser: false});
-      }) 
+      });
+    }
   };
 
   render() {
@@ -122,50 +129,65 @@ class RegisterUser extends Component {
             type="text"
             className="loginInput"
             placeholder="Fornavn"
+            value={this.state.firstName}
             onChange={this.handleFirstNameChange}
           />
+            <p className="errorMsg">{this.state.firstName >=1 ? "Fyll inn gyldig fornavn" : null}</p>
           <input
             type="text"
             className="loginInput"
             placeholder="Etternavn"
+            value={this.state.lastName}
             onChange={this.handleLastNameChange}
           />
+            <p className="errorMsg">{this.state.lastName >=1 ? "Fyll inn gyldig etternavn" : null}</p>
           <input
             type="text"
             className="loginInput"
             placeholder="Telefonnummer"
+            value={this.state.phoneNumber}
             onChange={this.handleNumberChange}
           />
+        <p className="errorMsg">{!this.validatePhoneNumber(this.state.phoneNumber) ? "Fyll inn gyldig telefonnummer" : null}</p>
           <input
             type="text"
             className="loginInput"
             placeholder="Addresse"
+            value={this.state.streetName}
             onChange={this.handleStreetNameChange}
           />
+         <p className="errorMsg">{!this.validateStreetName(this.state.streetName) ? "Fyll inn gyldig gate" : null}</p>
           <input
             type="text"
             className="loginInput"
             placeholder="Postnummer"
+            value={this.state.zipCode}
             onChange={this.handleZipCodeChange}
           />
+         <p className="errorMsg">{!this.validateZipCode(this.state.zipCode) ? "Fyll inn gyldig postnummer" : null}</p>
           <input
             type="text"
             className="loginInput"
             placeholder="Email"
+            value={this.state.email}
             onChange={this.handleEmailChange}
           />
+          <p className="errorMsg">{!this.validateEmail(this.state.email) ? "Fyll inn gyldig epost" : null}</p>
           <input
             type="password"
             className="loginInput"
             placeholder="Passord"
+            value={this.state.password}
             onChange={this.handlePasswordChange}
           />
           <input
             type="password"
             className="loginInput"
             placeholder="Gjenta passord"
+            value={this.state.repeatedPassword}
             onChange={this.handleRepeatPasswordChange}
           />
+        <p className="errorMsg">{this.state.password !== this.state.repeatedPassword ? "Gjenta passordet" : null}</p>
         </form>
         <Button className="registerButton" clicked={this.handleSubmit}>
           Bekreft

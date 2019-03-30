@@ -27,8 +27,8 @@ class Transaction extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     axios.post('/api/reports/newReport/', {
-      reportedUserID: this.props.isSeller ? this.props.buyerID : this.props.sellerID, 
-      reportingUserID: this.props.isSeller ? this.props.sellerID : this.props.buyerID,
+      reportedUserID: !this.props.isSeller ? this.props.buyerID : this.props.sellerID,
+      reportingUserID: !this.props.isSeller ? this.props.sellerID : this.props.buyerID,
       productID: this.props.productID,
       description: this.state.desc
     }).then(res => {console.log(res);
@@ -49,7 +49,7 @@ class Transaction extends Component {
     return (
       <div>
     <p>
-      {this.props.isSeller ? `Du solgte ${this.props.product} til ${this.props.buyer} for ${this.props.price}` : `Du kjøpte ${this.props.product} fra ${this.props.seller} for ${this.props.price}`}
+      {!this.props.isSeller ? `Du solgte ${this.props.product} til ${this.props.buyer} for ${this.props.price}` : `Du kjøpte ${this.props.product} fra ${this.props.seller} for ${this.props.price}`}
     </p>
       <div>
         <Button clicked={() => this.setState({isReporting: !this.state.isReporting})}>Rapporter</Button>
