@@ -21,8 +21,8 @@ class RegisterUser extends Component {
   validateName = (firstname, lastname) => {
     return (
       firstname.length >= 1 &&
-      /^[a-zA-Z\s]*$/.test(firstname) &&
-      (lastname.length >= 1 && /^[a-zA-Z\s]*$/.test(lastname))
+      /^[A-Za-z]+$/.test(firstname) &&
+      (lastname.length >= 1 && /^[A-Za-z]+$/.test(lastname))
     );
   };
 
