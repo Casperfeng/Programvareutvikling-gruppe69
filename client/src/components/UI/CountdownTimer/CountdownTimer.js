@@ -1,7 +1,5 @@
 import React from 'react';
 import Countdown from 'react-countdown-now';
-import './CountdownTimer.css';
- 
 
 const countdownTimer = (props) => (
   <div className="countdownTimer">
